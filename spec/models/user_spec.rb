@@ -62,6 +62,6 @@ describe User do
 
   def stub_successful_child_process_exit_code
     allow_message_expectations_on_nil
-    allow($?).to receive(:zero?).and_return(true)
+    allow($?).to receive(:success?).and_return(true)
   end
 end

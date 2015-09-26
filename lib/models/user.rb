@@ -28,7 +28,7 @@ class User
     args = ['--group', '--file', Settings.paths.groups, '--name', @name, '--gid', gid, '--member',
       @name]
     IO.popen [Settings.paths.ftpasswd, *args]
-    $?.zero?
+    $?.success?
   end
 
   def create_user
@@ -40,19 +40,19 @@ class User
       ftpasswd.close_write
     end
 
-    $?.zero?
+    $?.success?
   end
 
   def delete_group
     args = ['--group', '--file', Settings.paths.groups, '--name', @name, '--delete-group']
     IO.popen [Settings.paths.ftpasswd, *args]
-    $?.zero?
+    $?.success?
   end
 
   def delete_user
     args = ['--passwd', '--file', Settings.paths.users, '--name', @name, '--delete-user']
     IO.popen [Settings.paths.ftpasswd, *args]
-    $?.zero?
+    $?.success?
   end
 
   def gid
