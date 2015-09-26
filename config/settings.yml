@@ -1,0 +1,20 @@
+defaults: &defaults
+  paths:
+    ftpasswd: "<%= ENV['PROFTPD_FTPASSWD'] %>"
+    users: "<%= ENV['PROFTPD_USERS'] %>"
+    groups: "<%= ENV['PROFTPD_GROUPS'] %>"
+    home: "<%= ENV['PROFTPD_HOME'] %>"
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  paths:
+    ftpasswd: /test/bin/ftpasswd
+    users: /test/etc/users
+    groups: /test/etc/groups
+    home: /test/home/foo
