@@ -18,13 +18,13 @@ describe User do
       before do
         allow(File).to receive(:readlines).with('/test/etc/users').and_return(fixture('users').lines)
 
-        ftpasswd_pipe = instance_spy('IO')
-        expect(ftpasswd_pipe).to receive(:write).with('s3cr3t')
-        expect(ftpasswd_pipe).to receive(:close_write)
+        ftpasswd = instance_spy('IO')
+        expect(ftpasswd).to receive(:write).with('s3cr3t')
+        expect(ftpasswd).to receive(:close_write)
 
         expect(IO).to receive(:popen).with(['/test/bin/ftpasswd', '--passwd', '--file',
           '/test/etc/users', '--name', 'foo', '--uid', '5002', '--gid', '5002', '--home',
-          '/test/home/foo', '--shell', '/bin/false', '--stdin'], 'r+').and_yield(ftpasswd_pipe)
+          '/test/home/foo', '--shell', '/bin/false', '--stdin'], 'r+').and_yield(ftpasswd)
 
         expect(IO).to receive(:popen).with(['/test/bin/ftpasswd', '--group', '--file',
           '/test/etc/groups', '--name', 'foo', '--gid', '5002', '--member', 'foo'])

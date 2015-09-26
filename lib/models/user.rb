@@ -27,7 +27,7 @@ class User
   def create_group
     args = ['--group', '--file', Settings.paths.groups, '--name', @name, '--gid', gid, '--member',
       @name]
-    IO.popen [Settings.paths.ftpasswd, *args]
+    IO.popen([Settings.paths.ftpasswd, *args]) { |ftpasswd| ftpasswd.read }
     $?.success?
   end
 
@@ -38,6 +38,7 @@ class User
     IO.popen([Settings.paths.ftpasswd, *args], 'r+') do |ftpasswd|
       ftpasswd.write @password
       ftpasswd.close_write
+      ftpasswd.read
     end
 
     $?.success?
@@ -45,13 +46,13 @@ class User
 
   def delete_group
     args = ['--group', '--file', Settings.paths.groups, '--name', @name, '--delete-group']
-    IO.popen [Settings.paths.ftpasswd, *args]
+    IO.popen([Settings.paths.ftpasswd, *args]) { |ftpasswd| ftpasswd.read }
     $?.success?
   end
 
   def delete_user
     args = ['--passwd', '--file', Settings.paths.users, '--name', @name, '--delete-user']
-    IO.popen [Settings.paths.ftpasswd, *args]
+    IO.popen([Settings.paths.ftpasswd, *args]) { |ftpasswd| ftpasswd.read }
     $?.success?
   end
 
