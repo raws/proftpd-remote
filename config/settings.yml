@@ -1,4 +1,7 @@
 defaults: &defaults
+  auth:
+    username: "<%= ENV['PROFTPD_API_USERNAME'] %>"
+    password: "<%= ENV['PROFTPD_API_PASSWORD'] %>"
   paths:
     ftpasswd: "<%= ENV['PROFTPD_FTPASSWD'] %>"
     users: "<%= ENV['PROFTPD_USERS'] %>"
@@ -13,6 +16,9 @@ production:
 
 test:
   <<: *defaults
+  auth:
+    username: test
+    password: test
   paths:
     ftpasswd: /test/bin/ftpasswd
     users: /test/etc/users

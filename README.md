@@ -8,6 +8,8 @@ In order to run the app, these environment variables must be set:
 
 | Name | Description |
 |------|-------------|
+| `PROFTPD_API_USERNAME` | Username required to make API requests. |
+| `PROFTPD_API_PASSWORD` | Password required to make API requests. |
 | `PROFTPD_FTPASSWD` | Path to ProFTPD's `ftpasswd` binary. |
 | `PROFTPD_HOME` | Path to the user jail to set for new ProFTPD users. |
 | `PROFTPD_USERS` | Path to ProFTPD's users file, specified by the [AuthUserFile](http://www.proftpd.org/docs/directives/linked/config_ref_AuthUserFile.html) directive. |
